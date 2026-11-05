@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import type { Project } from "@/app/data/projects";
-import Todo from "./Todo";
 
 type ProjectVisualProps = {
   project: Project;
@@ -9,7 +8,10 @@ type ProjectVisualProps = {
   priority?: boolean;
 };
 
-/** Capture du projet, ou placeholder TODO tant qu'aucune capture n'est fournie. */
+/**
+ * Capture du projet. Sans capture (TODO dans app/data/projects.ts), on affiche
+ * un aplat décoratif portant le nom du projet, sans placeholder visible.
+ */
 export default function ProjectVisual({ project, sizes, priority = false }: ProjectVisualProps) {
   if (project.image) {
     return (
@@ -26,9 +28,11 @@ export default function ProjectVisual({ project, sizes, priority = false }: Proj
   }
 
   return (
-    <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-[var(--radius-card)] bg-parquet">
+    <div
+      aria-hidden="true"
+      className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-[var(--radius-card)] bg-parquet"
+    >
       <svg
-        aria-hidden="true"
         focusable="false"
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 320 180"
@@ -39,8 +43,8 @@ export default function ProjectVisual({ project, sizes, priority = false }: Proj
           <path d="M160 0v180" />
         </g>
       </svg>
-      <span className="relative">
-        <Todo>capture de {project.title}</Todo>
+      <span className="relative font-display text-4xl font-bold uppercase tracking-wide text-navy/80">
+        {project.title}
       </span>
     </div>
   );

@@ -22,7 +22,7 @@ export type Profile = {
   linkedin: string;
   github: string;
   formspreeEndpoint: string;
-  /** TODO : CV PDF sans données personnelles (sujet : lien de téléchargement obligatoire). */
+  /** CV PDF sans données personnelles (sujet : lien de téléchargement obligatoire). Bouton masqué si null. */
   cvUrl: string | null;
   photo: Photo;
 };

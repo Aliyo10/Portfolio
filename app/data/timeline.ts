@@ -44,7 +44,7 @@ export const timeline: TimelineEntry[] = [
     kind: "experience",
     period: "Novembre 2022 – août 2024",
     title: "Manutentionnaire",
-    organization: "GL Event",
+    organization: "GL events",
     place: "Lyon",
     details: ["Gestion des approvisionnements et installation des buvettes."],
   },

@@ -5,7 +5,6 @@ import type { Project } from "@/app/data/projects";
 import { ArrowRightIcon } from "./Icons";
 import ProjectVisual from "./ProjectVisual";
 import Tag from "./Tag";
-import Todo from "./Todo";
 
 type ProjectCardProps = {
   project: Project;
@@ -24,9 +23,7 @@ export default function ProjectCard({ project, style }: ProjectCardProps) {
       <div className="flex flex-1 flex-col gap-3 px-1 pt-5 pb-1">
         {project.context ? (
           <p className="text-sm font-semibold uppercase tracking-wide text-muted">{project.context}</p>
-        ) : (
-          <Todo>contexte du projet</Todo>
-        )}
+        ) : null}
 
         <h3 className="text-3xl font-bold uppercase text-ink">
           <Link
@@ -39,9 +36,7 @@ export default function ProjectCard({ project, style }: ProjectCardProps) {
 
         {project.summary ? (
           <p className="text-muted">{project.summary}</p>
-        ) : (
-          <Todo as="p">description du projet</Todo>
-        )}
+        ) : null}
 
         {project.stack.length > 0 ? (
           <ul className="flex flex-wrap gap-2" aria-label="Technologies">
@@ -51,9 +46,7 @@ export default function ProjectCard({ project, style }: ProjectCardProps) {
               </li>
             ))}
           </ul>
-        ) : (
-          <Todo>stack technique</Todo>
-        )}
+        ) : null}
 
         <p className="mt-auto inline-flex items-center gap-2 pt-2 font-semibold text-link">
           Voir la fiche

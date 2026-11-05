@@ -4,7 +4,6 @@ import { profile } from "@/app/data/profile";
 import ButtonLink from "./ButtonLink";
 import { ArrowRightIcon, DownloadIcon } from "./Icons";
 import { revealDelay } from "./reveal";
-import Todo from "./Todo";
 
 export default function Hero() {
   return (
@@ -37,14 +36,6 @@ export default function Hero() {
               </ButtonLink>
             ) : null}
           </div>
-          {profile.cvUrl ? null : (
-            <p className="mt-4">
-              <Todo>
-                lien « Télécharger mon CV » : fournir un PDF sans téléphone, date de naissance ni
-                adresse
-              </Todo>
-            </p>
-          )}
         </div>
 
         <div className="mx-auto w-full max-w-sm lg:max-w-none" data-reveal style={revealDelay(2)}>

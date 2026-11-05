@@ -39,3 +39,8 @@ export const softSkills: string[] = [
   "Polyvalence",
   "Curiosité & veille informatique",
 ];
+
+// TODO : auto-évaluation par compétence du titre RNCP (niveau atteint, preuves,
+// ressources mobilisées, prochaines étapes), exigée par le sujet.
+// Tant que la valeur est null, le bloc « Progression » n'est pas affiché.
+export const selfAssessment: string | null = null;

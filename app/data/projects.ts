@@ -8,7 +8,8 @@
 // fonctionnalités décrites ci-dessus. Le rattachement aux blocs officiels du
 // titre RNCP reste à faire (le référentiel n'a pas été fourni) : « rncp: null ».
 //
-// Rien n'est inventé : toute information manquante vaut null et s'affiche en TODO.
+// Rien n'est inventé : toute information manquante vaut null (ou []) et n'est
+// pas affichée sur le site. Chaque projet liste ses TODO ci-dessous.
 
 export type ProjectLinks = {
   demo: string | null;
@@ -32,7 +33,7 @@ export type Project = {
   stack: string[];
   features: string[];
   competences: string[];
-  /** Blocs / compétences RNCP officiels démontrés. TODO tant que null. */
+  /** Blocs / compétences RNCP officiels démontrés. Non affiché tant que null. */
   rncp: string[] | null;
   /** Analyse : ce que le projet m'a appris, difficultés, progression. */
   learnings: string | null;
@@ -41,6 +42,8 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // TODO (RPG) : période, rôle, analyse « ce que j'en retiens », rattachement RNCP,
+  // capture, lien de démo, lien GitHub.
   {
     slug: "rpg",
     title: "RPG",
@@ -61,6 +64,8 @@ export const projects: Project[] = [
     links: { demo: null, repo: null },
     image: null,
   },
+  // TODO (GuessWhat) : contexte, période, rôle, analyse, rattachement RNCP, capture,
+  // lien de démo, lien GitHub.
   {
     slug: "guesswhat",
     title: "GuessWhat",
@@ -81,6 +86,8 @@ export const projects: Project[] = [
     links: { demo: null, repo: null },
     image: null,
   },
+  // TODO (my_bot) : tout le contenu sauf le nom (description, contexte, période, rôle,
+  // stack, fonctionnalités, compétences, analyse, RNCP, capture, liens).
   {
     slug: "my-bot",
     title: "my_bot",
@@ -96,6 +103,8 @@ export const projects: Project[] = [
     links: { demo: null, repo: null },
     image: null,
   },
+  // TODO (Sportly) : tout le contenu sauf le nom (description, contexte, période, rôle,
+  // stack, fonctionnalités, compétences, analyse, RNCP, capture, liens).
   {
     slug: "sportly",
     title: "Sportly",

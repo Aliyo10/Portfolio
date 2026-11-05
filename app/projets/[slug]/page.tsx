@@ -7,8 +7,10 @@ import ButtonLink from "@/app/components/ButtonLink";
 import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon } from "@/app/components/Icons";
 import ProjectVisual from "@/app/components/ProjectVisual";
 import Tag from "@/app/components/Tag";
-import Todo from "@/app/components/Todo";
 import { getProject, projects } from "@/app/data/projects";
+
+// Règle d'affichage : un bloc sans contenu n'est jamais rendu.
+// Les informations manquantes restent en TODO dans app/data/projects.ts.
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -25,9 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = getProject(slug);
   if (!project) return {};
 
-  const description =
-    project.summary ??
-    `Fiche du projet ${project.title} : contexte, stack technique et compétences démontrées.`;
+  const description = project.summary ?? `Fiche du projet ${project.title}.`;
 
   return {
     title: `Projet ${project.title}`,
@@ -50,6 +50,18 @@ export default async function ProjectPage({ params }: PageProps) {
   const index = projects.findIndex((item) => item.slug === project.slug);
   const previous = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
+
+  const meta = [
+    { label: "Contexte", value: project.context },
+    { label: "Période", value: project.period },
+    { label: "Mon rôle", value: project.role },
+  ].filter((item): item is { label: string; value: string } => Boolean(item.value));
+
+  const rncp = project.rncp ?? [];
+  const hasLinks = Boolean(project.links.demo || project.links.repo);
+  const hasAside = project.stack.length > 0 || hasLinks;
+  const hasMain =
+    project.features.length > 0 || project.competences.length > 0 || Boolean(project.learnings);
 
   return (
     <article className="section">
@@ -74,114 +86,117 @@ export default async function ProjectPage({ params }: PageProps) {
           </ol>
         </nav>
 
-        <header className="mb-10 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end" data-reveal>
+        <header
+          className={`mb-10 grid gap-8 ${meta.length > 0 ? "lg:grid-cols-2 lg:items-end" : ""}`}
+          data-reveal
+        >
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-link">
               Fiche projet
             </p>
             <h1 className="text-5xl font-bold uppercase text-ink sm:text-6xl">{project.title}</h1>
-            <div className="mt-5 text-lg text-muted">
-              {project.summary ? <p>{project.summary}</p> : <Todo as="p">description du projet</Todo>}
-            </div>
+            {project.summary ? (
+              <p className="mt-5 text-lg text-muted">{project.summary}</p>
+            ) : null}
           </div>
 
-          <dl className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-            <Meta label="Contexte">{project.context ?? <Todo>contexte</Todo>}</Meta>
-            <Meta label="Période">{project.period ?? <Todo>dates</Todo>}</Meta>
-            <Meta label="Mon rôle">{project.role ?? <Todo>rôle, équipe</Todo>}</Meta>
-          </dl>
+          {meta.length > 0 ? (
+            <dl className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              {meta.map((item) => (
+                <div key={item.label} className="border-l-2 border-accent pl-4">
+                  <dt className="text-sm font-semibold uppercase tracking-wide text-muted">
+                    {item.label}
+                  </dt>
+                  <dd className="font-medium text-ink">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
         </header>
 
-        <div data-reveal>
-          <ProjectVisual project={project} sizes="(min-width: 1120px) 1024px, 92vw" priority />
-        </div>
-
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-          <div className="space-y-10">
-            <Block title="Le projet">
-              {project.features.length > 0 ? (
-                <ul className="space-y-2">
-                  {project.features.map((feature) => (
-                    <Bullet key={feature}>{feature}</Bullet>
-                  ))}
-                </ul>
-              ) : (
-                <Todo as="p">fonctionnalités principales</Todo>
-              )}
-            </Block>
-
-            <Block title="Compétences démontrées">
-              {project.competences.length > 0 ? (
-                <ul className="space-y-2">
-                  {project.competences.map((competence) => (
-                    <Bullet key={competence}>{competence}</Bullet>
-                  ))}
-                </ul>
-              ) : (
-                <Todo as="p">compétences démontrées par ce projet</Todo>
-              )}
-              <div className="mt-5 rounded-[var(--radius-card)] border border-border bg-surface p-4">
-                <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">
-                  Titre RNCP Développeur web · niveau 5
-                </p>
-                {project.rncp && project.rncp.length > 0 ? (
-                  <ul className="flex flex-wrap gap-2">
-                    {project.rncp.map((item) => (
-                      <li key={item}>
-                        <Tag>{item}</Tag>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <Todo as="p">rattacher ces compétences aux blocs officiels du référentiel</Todo>
-                )}
-              </div>
-            </Block>
-
-            <Block title="Ce que j’en retiens">
-              {project.learnings ? (
-                <p>{project.learnings}</p>
-              ) : (
-                <Todo as="p">analyse : apprentissages, difficultés rencontrées, progression</Todo>
-              )}
-            </Block>
+        {project.image ? (
+          <div data-reveal>
+            <ProjectVisual project={project} sizes="(min-width: 1120px) 1024px, 92vw" priority />
           </div>
+        ) : null}
 
-          <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start" aria-label="Stack et liens">
-            <Block title="Stack">
-              {project.stack.length > 0 ? (
-                <ul className="flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <li key={tech}>
-                      <Tag>{tech}</Tag>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <Todo as="p">technologies utilisées</Todo>
-              )}
-            </Block>
+        {hasMain || hasAside ? (
+          <div
+            className={`mt-12 grid gap-10 ${hasMain && hasAside ? "lg:grid-cols-[1.4fr_1fr] lg:gap-16" : ""}`}
+          >
+            {hasMain ? (
+              <div className="space-y-10">
+                {project.features.length > 0 ? (
+                  <Block title="Le projet">
+                    <BulletList items={project.features} />
+                  </Block>
+                ) : null}
 
-            <Block title="Liens">
-              <div className="flex flex-wrap gap-3">
-                {project.links.demo ? (
-                  <ButtonLink href={project.links.demo} external>
-                    Démo <ExternalLinkIcon size={18} />
-                  </ButtonLink>
-                ) : (
-                  <Todo>lien de démo</Todo>
-                )}
-                {project.links.repo ? (
-                  <ButtonLink href={project.links.repo} variant="secondary" external>
-                    Code source <ExternalLinkIcon size={18} />
-                  </ButtonLink>
-                ) : (
-                  <Todo>lien GitHub</Todo>
-                )}
+                {project.competences.length > 0 ? (
+                  <Block title="Compétences démontrées">
+                    <BulletList items={project.competences} />
+                    {rncp.length > 0 ? (
+                      <div className="mt-5 rounded-[var(--radius-card)] border border-border bg-surface p-4">
+                        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">
+                          Titre RNCP Développeur web · niveau 5
+                        </p>
+                        <ul className="flex flex-wrap gap-2">
+                          {rncp.map((item) => (
+                            <li key={item}>
+                              <Tag>{item}</Tag>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </Block>
+                ) : null}
+
+                {project.learnings ? (
+                  <Block title="Ce que j’en retiens">
+                    <p>{project.learnings}</p>
+                  </Block>
+                ) : null}
               </div>
-            </Block>
-          </aside>
-        </div>
+            ) : null}
+
+            {hasAside ? (
+              <aside
+                className="space-y-8 lg:sticky lg:top-24 lg:self-start"
+                aria-label="Stack et liens"
+              >
+                {project.stack.length > 0 ? (
+                  <Block title="Stack">
+                    <ul className="flex flex-wrap gap-2">
+                      {project.stack.map((tech) => (
+                        <li key={tech}>
+                          <Tag>{tech}</Tag>
+                        </li>
+                      ))}
+                    </ul>
+                  </Block>
+                ) : null}
+
+                {hasLinks ? (
+                  <Block title="Liens">
+                    <div className="flex flex-wrap gap-3">
+                      {project.links.demo ? (
+                        <ButtonLink href={project.links.demo} external>
+                          Démo <ExternalLinkIcon size={18} />
+                        </ButtonLink>
+                      ) : null}
+                      {project.links.repo ? (
+                        <ButtonLink href={project.links.repo} variant="secondary" external>
+                          Code source <ExternalLinkIcon size={18} />
+                        </ButtonLink>
+                      ) : null}
+                    </div>
+                  </Block>
+                ) : null}
+              </aside>
+            ) : null}
+          </div>
+        ) : null}
 
         {previous && next ? (
           <nav
@@ -221,15 +236,6 @@ export default async function ProjectPage({ params }: PageProps) {
   );
 }
 
-function Meta({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="border-l-2 border-accent pl-4">
-      <dt className="text-sm font-semibold uppercase tracking-wide text-muted">{label}</dt>
-      <dd className="font-medium text-ink">{children}</dd>
-    </div>
-  );
-}
-
 function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section data-reveal>
@@ -239,11 +245,15 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-function Bullet({ children }: { children: ReactNode }) {
+function BulletList({ items }: { items: string[] }) {
   return (
-    <li className="flex gap-3">
-      <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-      <span>{children}</span>
-    </li>
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li key={item} className="flex gap-3">
+          <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
