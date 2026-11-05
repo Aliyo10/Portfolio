@@ -4,8 +4,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@/app/components/Icons";
 import { revealDelay } from "@/app/components/reveal";
 import SectionHeading from "@/app/components/SectionHeading";
-import Tag from "@/app/components/Tag";
-import { competencyAreas, learningAnalysis, learningSteps } from "@/app/data/progression";
+import { competencyBlocks, learningAnalysis, learningSteps, RNCP_URL } from "@/app/data/progression";
 import { projects } from "@/app/data/projects";
 
 // Règle d'affichage : un bloc sans contenu n'est jamais rendu.
@@ -73,73 +72,88 @@ export default function ProgressionPage() {
 
       <section aria-labelledby="preuves-titre" className="section bg-surface">
         <div className="container-page">
-          <SectionHeading id="preuves-titre" eyebrow="Preuves à l’appui" title="Compétences développées">
-            <p>Pour chaque domaine, les réalisations qui démontrent ce que j’ai mis en pratique.</p>
+          <SectionHeading id="preuves-titre" eyebrow="Preuves à l’appui" title="Compétences du titre">
+            <p>
+              Les 14 compétences du titre{" "}
+              <a className="text-link" href={RNCP_URL} target="_blank" rel="noopener noreferrer">
+                RNCP42870 Développeur web<span className="sr-only"> (nouvel onglet)</span>
+              </a>
+              , avec les réalisations qui s’y rattachent.
+            </p>
           </SectionHeading>
 
-          <ul className="grid gap-5 md:grid-cols-2">
-            {competencyAreas.map((area, index) => {
-              const details = [
-                { label: "Mon niveau", text: area.level },
-                { label: "Ressources mobilisées", text: area.resources },
-                { label: "Prochaine étape", text: area.nextStep },
-              ].filter((item): item is { label: string; text: string } => Boolean(item.text));
-
-              return (
-                <li
-                  key={area.title}
-                  className="rounded-[var(--radius-card)] border border-border bg-bg p-6"
+          <div className="space-y-12">
+            {competencyBlocks.map((block) => (
+              <section key={block.code} aria-labelledby={`${block.code}-titre`}>
+                <h3
+                  id={`${block.code}-titre`}
+                  className="mb-5 text-3xl font-bold uppercase text-ink"
                   data-reveal
-                  style={revealDelay(index % 2)}
                 >
-                  <h3 className="mb-4 text-2xl font-bold uppercase text-ink">{area.title}</h3>
+                  <span className="text-link">{block.code}</span> · {block.title}
+                </h3>
 
-                  <ul className="space-y-3">
-                    {area.proofs.map((proof) => (
-                      <li key={`${proof.label}-${proof.description}`}>
-                        <Link
-                          href={proof.href}
-                          className="inline-flex min-h-6 items-center gap-1.5 font-semibold text-link underline underline-offset-4"
-                        >
-                          {proof.label}
-                          <ArrowRightIcon size={15} />
-                        </Link>
-                        <p className="text-muted">{proof.description}</p>
+                <ul className="grid gap-5 md:grid-cols-2">
+                  {block.competencies.map((competency, index) => {
+                    const details = [
+                      { label: "Mon niveau", text: competency.level },
+                      { label: "Ressources mobilisées", text: competency.resources },
+                      { label: "Prochaine étape", text: competency.nextStep },
+                    ].filter((item): item is { label: string; text: string } => Boolean(item.text));
+
+                    return (
+                      <li
+                        key={competency.id}
+                        id={competency.id}
+                        className="rounded-[var(--radius-card)] border border-border bg-bg p-6"
+                        data-reveal
+                        style={revealDelay(index % 2)}
+                      >
+                        <h4 className="mb-4 font-display text-2xl font-bold uppercase leading-tight text-ink">
+                          {competency.title}
+                        </h4>
+
+                        <ul className="space-y-3">
+                          {competency.proofs.map((proof) => (
+                            <li key={`${proof.label}-${proof.description}`}>
+                              <Link
+                                href={proof.href}
+                                className="inline-flex min-h-6 items-center gap-1.5 font-semibold text-link underline underline-offset-4"
+                              >
+                                {proof.label}
+                                <ArrowRightIcon size={15} />
+                              </Link>
+                              <p className="text-muted">{proof.description}</p>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {details.length > 0 ? (
+                          <dl className="mt-5 space-y-3 border-t border-border pt-4">
+                            {details.map((item) => (
+                              <div key={item.label}>
+                                <dt className="text-sm font-semibold uppercase tracking-wide text-muted">
+                                  {item.label}
+                                </dt>
+                                <dd>{item.text}</dd>
+                              </div>
+                            ))}
+                          </dl>
+                        ) : null}
+
+                        <details className="mt-5 border-t border-border pt-3 text-sm text-muted">
+                          <summary className="inline-flex min-h-6 cursor-pointer items-center font-semibold text-navy">
+                            Intitulé officiel
+                          </summary>
+                          <p className="mt-2">{competency.official}</p>
+                        </details>
                       </li>
-                    ))}
-                  </ul>
-
-                  {area.rncp && area.rncp.length > 0 ? (
-                    <div className="mt-5">
-                      <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">
-                        Titre RNCP
-                      </p>
-                      <ul className="flex flex-wrap gap-2">
-                        {area.rncp.map((item) => (
-                          <li key={item}>
-                            <Tag>{item}</Tag>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-
-                  {details.length > 0 ? (
-                    <dl className="mt-5 space-y-3 border-t border-border pt-4">
-                      {details.map((item) => (
-                        <div key={item.label}>
-                          <dt className="text-sm font-semibold uppercase tracking-wide text-muted">
-                            {item.label}
-                          </dt>
-                          <dd>{item.text}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  ) : null}
-                </li>
-              );
-            })}
-          </ul>
+                    );
+                  })}
+                </ul>
+              </section>
+            ))}
+          </div>
         </div>
       </section>
 

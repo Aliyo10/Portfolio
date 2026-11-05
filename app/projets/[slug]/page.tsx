@@ -7,6 +7,7 @@ import ButtonLink from "@/app/components/ButtonLink";
 import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon } from "@/app/components/Icons";
 import ProjectVisual from "@/app/components/ProjectVisual";
 import Tag from "@/app/components/Tag";
+import { getProjectCompetencies, RNCP_URL } from "@/app/data/progression";
 import { getProject, projects } from "@/app/data/projects";
 
 // Règle d'affichage : un bloc sans contenu n'est jamais rendu.
@@ -57,13 +58,14 @@ export default async function ProjectPage({ params }: PageProps) {
     { label: "Mon rôle", value: project.role },
   ].filter((item): item is { label: string; value: string } => Boolean(item.value));
 
-  const rncp = project.rncp ?? [];
+  const rncp = getProjectCompetencies(project.slug);
   const hasLinks = Boolean(project.links.demo || project.links.repo);
   const hasAside = project.stack.length > 0 || hasLinks;
   const hasMain =
     project.features.length > 0 ||
     project.contributions.length > 0 ||
     project.competences.length > 0 ||
+    rncp.length > 0 ||
     Boolean(project.learnings);
 
   return (
@@ -144,20 +146,22 @@ export default async function ProjectPage({ params }: PageProps) {
                 {project.competences.length > 0 ? (
                   <Block title="Compétences démontrées">
                     <BulletList items={project.competences} />
-                    {rncp.length > 0 ? (
-                      <div className="mt-5 rounded-[var(--radius-card)] border border-border bg-surface p-4">
-                        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">
-                          Titre RNCP Développeur web · niveau 5
-                        </p>
-                        <ul className="flex flex-wrap gap-2">
-                          {rncp.map((item) => (
-                            <li key={item}>
-                              <Tag>{item}</Tag>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
+                  </Block>
+                ) : null}
+
+                {rncp.length > 0 ? (
+                  <Block title="Compétences du titre RNCP">
+                    <BulletList items={rncp} />
+                    <p className="mt-3 text-sm text-muted">
+                      Titre{" "}
+                      <a className="text-link" href={RNCP_URL} target="_blank" rel="noopener noreferrer">
+                        RNCP42870 Développeur web<span className="sr-only"> (nouvel onglet)</span>
+                      </a>
+                      .{" "}
+                      <Link className="text-link" href="/progression">
+                        Voir toutes les preuves
+                      </Link>
+                    </p>
                   </Block>
                 ) : null}
 

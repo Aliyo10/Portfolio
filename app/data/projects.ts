@@ -6,8 +6,8 @@
 // - my_bot : message d'Aliyo + repo W-WEB-405-LYN-4-1-mybot-1 (lecture seule).
 //
 // « competences » : compétences démontrées, déduites strictement des
-// fonctionnalités et contributions décrites. Le rattachement aux blocs officiels
-// du titre RNCP reste à faire (le référentiel n'a pas été fourni) : « rncp: null ».
+// fonctionnalités et contributions décrites. Le rattachement aux compétences du
+// titre RNCP se trouve dans app/data/progression.ts (preuves de chaque compétence).
 //
 // Rien n'est inventé : toute information manquante vaut null (ou []) et n'est
 // pas affichée sur le site. Chaque projet liste ses TODO ci-dessous.
@@ -38,8 +38,6 @@ export type Project = {
   /** Ce que j'ai fait personnellement (bloc « Ce que j'ai fait »). */
   contributions: string[];
   competences: string[];
-  /** Blocs / compétences RNCP officiels démontrés. Non affiché tant que null. */
-  rncp: string[] | null;
   /** Analyse : ce que le projet m'a appris, difficultés, progression. */
   learnings: string | null;
   links: ProjectLinks;
@@ -50,7 +48,7 @@ export const projects: Project[] = [
   // Source : CV + repo W-WEB-401-LYN-4-1-ruby-6 (lecture seule : README, Gemfile,
   // package.json, structure). Un seul commit, d'Aliyo, daté du 06/06/2026 : d'où
   // « Projet individuel » (à confirmer). Capture : page d'accueil du front (sans API).
-  // TODO (RPG) : période, analyse « ce que j'en retiens », rattachement RNCP, lien de démo.
+  // TODO (RPG) : période, analyse « ce que j'en retiens », lien de démo.
   {
     slug: "rpg",
     title: "RPG · L’Ère des Ombres",
@@ -91,7 +89,6 @@ export const projects: Project[] = [
       "Tester une API avec RSpec",
       "Développer une interface Next.js qui consomme l’API",
     ],
-    rncp: null,
     learnings: null,
     links: { demo: null, repo: null },
     image: {
@@ -102,7 +99,7 @@ export const projects: Project[] = [
     },
   },
   // TODO (GuessWhat) : contexte, période, rôle, ce que j'ai fait, analyse,
-  // rattachement RNCP, lien de démo.
+  // lien de démo.
   {
     slug: "guesswhat",
     title: "GuessWhat",
@@ -119,7 +116,6 @@ export const projects: Project[] = [
       "Synchroniser une partie entre plusieurs joueurs",
       "Développer l’interface de jeu en Next.js",
     ],
-    rncp: null,
     learnings: null,
     links: { demo: null, repo: null },
     // Capture réelle du front (repo W-WEB-404-LYN-4-1-mygo-2, commit 6d899fa).
@@ -133,7 +129,7 @@ export const projects: Project[] = [
   // Source : repo W-WEB-405-LYN-4-1-mybot-1 (lecture seule : README, package.json,
   // structure, commits — 5 commits, tous d'Aliyo, du 26/10 au 01/11/2026).
   // « learnings » : proposition rédigée à partir des choix techniques du repo, à valider.
-  // TODO (my_bot) : rattachement RNCP, lien de démo.
+  // TODO (my_bot) : lien de démo.
   {
     slug: "my-bot",
     title: "my_bot · Generative Pets",
@@ -175,7 +171,6 @@ export const projects: Project[] = [
       "Persister des données dans le navigateur et gérer ses limites",
       "Utiliser une API du navigateur : Web Speech API",
     ],
-    rncp: null,
     learnings:
       "Brancher un modèle local m’a appris à encadrer ses réponses plutôt qu’à lui faire confiance : le catalogue est fourni dans le prompt, et l’interface n’affiche que les fiches dont l’identifiant existe. J’ai aussi dû composer avec les limites du navigateur, de la taille des images au quota du stockage local.",
     links: { demo: null, repo: null },
@@ -188,7 +183,7 @@ export const projects: Project[] = [
     },
   },
   // Période : projet de fin d'année, commencé en début d'année (premier commit le 28/07/2026).
-  // TODO (Sportly) : rattachement RNCP, lien de démo.
+  // TODO (Sportly) : lien de démo.
   {
     slug: "sportly",
     title: "Sportly",
@@ -230,7 +225,6 @@ export const projects: Project[] = [
       "Sécuriser l’authentification et valider les entrées avec Zod",
       "Intégrer une application mobile et une API via un client partagé",
     ],
-    rncp: null,
     learnings:
       "Tenir le rôle de tech lead m’a appris qu’un socle commun posé tôt (modèle de données, authentification, routage par module, client API) permet à chacun d’avancer sur son lot sans bloquer les autres. Modéliser un domaine complet, des prestataires aux créneaux, réservations et avis, m’a obligé à fixer les règles métier avant d’écrire le code. Enfin, brancher moi-même les écrans sur l’API m’a montré l’importance d’un contrat clair entre le front et le back.",
     links: { demo: null, repo: null },
