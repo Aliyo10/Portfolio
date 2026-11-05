@@ -234,12 +234,13 @@ export const projects: Project[] = [
     learnings:
       "Tenir le rôle de tech lead m’a appris qu’un socle commun posé tôt (modèle de données, authentification, routage par module, client API) permet à chacun d’avancer sur son lot sans bloquer les autres. Modéliser un domaine complet, des prestataires aux créneaux, réservations et avis, m’a obligé à fixer les règles métier avant d’écrire le code. Enfin, brancher moi-même les écrans sur l’API m’a montré l’importance d’un contrat clair entre le front et le back.",
     links: { demo: null, repo: null },
-    // Captures réelles de l'app (version web Expo, sans backend) : accueil et inscription.
+    // Captures réelles de l'app (Expo web + backend local, compte de démo des seeds) :
+    // accueil, communauté (annuaire des clubs) et statistiques.
     image: {
       src: "/projects/sportly.jpg",
       width: 1920,
       height: 1080,
-      alt: "Deux écrans de l’application Sportly : l’accueil et la création de compte",
+      alt: "Trois écrans de l’application Sportly : l’accueil avec l’objectif de la semaine, l’annuaire des clubs à proximité et les statistiques de progression",
     },
   },
 ];
