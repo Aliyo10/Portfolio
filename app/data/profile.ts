@@ -50,6 +50,8 @@ export const profile: Profile = {
 export type NavItem = {
   id: string;
   label: string;
+  /** Page dédiée ; sinon le lien vise la section de l'accueil portant cet id. */
+  href?: string;
 };
 
 export const navItems: NavItem[] = [
@@ -57,5 +59,6 @@ export const navItems: NavItem[] = [
   { id: "competences", label: "Compétences" },
   { id: "parcours", label: "Parcours" },
   { id: "projets", label: "Projets" },
+  { id: "progression", label: "Progression", href: "/progression" },
   { id: "contact", label: "Contact" },
 ];

@@ -16,13 +16,14 @@ Portfolio d'Aliyo Moussa, alternant développeur web (Epitech Lyon, titre RNCP n
 app/
   layout.tsx            Layout commun : header, footer, fond terrain, metadata
   page.tsx              Accueil : hero, à propos, compétences, parcours, projets, contact
+  progression/          Portfolio d'apprentissage : étapes, preuves par compétence, analyse
   projets/[slug]/       Fiche détaillée de chaque projet
   components/           Composants (PascalCase)
-  data/                 Contenu typé : profil, à propos, compétences, parcours, projets
+  data/                 Contenu typé : profil, à propos, compétences, parcours, projets, progression
   sitemap.ts, robots.ts SEO
 ```
 
-Le contenu se modifie dans `app/data/`. Une valeur `null` s'affiche comme un **TODO** sur le site.
+Le contenu se modifie dans `app/data/`. Une valeur `null` n'est pas affichée sur le site : le bloc correspondant reste masqué.
 
 ## Scripts
 

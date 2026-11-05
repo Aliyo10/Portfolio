@@ -58,7 +58,9 @@ export default function SiteNav({ items }: SiteNavProps) {
   }, [pathname]);
 
   const isActive = (id: string) =>
-    isHome ? activeId === id : id === "projets" && pathname.startsWith("/projets");
+    isHome ? activeId === id : pathname.startsWith(id === "projets" ? "/projets" : `/${id}`);
+
+  const hrefOf = (item: NavItem) => item.href ?? `/#${item.id}`;
 
   const linkClass = (id: string) =>
     [
@@ -72,11 +74,11 @@ export default function SiteNav({ items }: SiteNavProps) {
   return (
     <nav aria-label="Navigation principale">
       {/* Desktop */}
-      <ul className="hidden items-center gap-6 md:flex">
+      <ul className="hidden items-center gap-5 lg:flex">
         {items.map((item) => (
           <li key={item.id}>
             <Link
-              href={`/#${item.id}`}
+              href={hrefOf(item)}
               className={linkClass(item.id)}
               aria-current={isActive(item.id) ? "true" : undefined}
             >
@@ -90,7 +92,7 @@ export default function SiteNav({ items }: SiteNavProps) {
       <button
         ref={toggleRef}
         type="button"
-        className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-[var(--radius-button)] text-ink transition-colors hover:bg-parquet md:hidden"
+        className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-[var(--radius-button)] text-ink transition-colors hover:bg-parquet lg:hidden"
         aria-expanded={open}
         aria-controls="menu-mobile"
         onClick={() => setOpen((value) => !value)}
@@ -102,13 +104,13 @@ export default function SiteNav({ items }: SiteNavProps) {
       <div
         id="menu-mobile"
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-border bg-surface shadow-[var(--shadow-card)] md:hidden"
+        className="absolute inset-x-0 top-full border-b border-border bg-surface shadow-[var(--shadow-card)] lg:hidden"
       >
         <ul className="container-page flex flex-col py-2">
           {items.map((item) => (
             <li key={item.id}>
               <Link
-                href={`/#${item.id}`}
+                href={hrefOf(item)}
                 onClick={close}
                 className={`${linkClass(item.id)} w-full`}
                 aria-current={isActive(item.id) ? "true" : undefined}
