@@ -1,6 +1,5 @@
 // Sources :
-// - RPG : CV (« RPG – Ruby on Rails / Next.js : Application avec API REST,
-//   authentification, quêtes, combats et inventaire »).
+// - RPG : CV + repo W-WEB-401-LYN-4-1-ruby-6 (lecture seule).
 // - GuessWhat : message d'Aliyo (« Pictionary multijoueur, Go + WebSockets + Next.js »).
 // - Sportly : message d'Aliyo + repo W-PJL-400-LYN-4-1-projetlibre-1 (lu en lecture
 //   seule : package.json, docs, historique des commits d'Aliyo).
@@ -48,28 +47,59 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  // TODO (RPG) : période, rôle, ce que j'ai fait, analyse « ce que j'en retiens »,
-  // rattachement RNCP, capture, lien de démo.
+  // Source : CV + repo W-WEB-401-LYN-4-1-ruby-6 (lecture seule : README, Gemfile,
+  // package.json, structure). Un seul commit, d'Aliyo, daté du 06/06/2026 : d'où
+  // « Projet individuel » (à confirmer). Capture : page d'accueil du front (sans API).
+  // TODO (RPG) : période, analyse « ce que j'en retiens », rattachement RNCP, lien de démo.
   {
     slug: "rpg",
-    title: "RPG",
-    summary: "Application avec API REST, authentification, quêtes, combats et inventaire.",
+    title: "RPG · L’Ère des Ombres",
+    summary:
+      "Jeu de rôle full stack dans le Japon médiéval : personnages, inventaire, équipement, quêtes, énigmes et combats.",
     context: "Projet Epitech · Titre RNCP Développeur web",
     period: null,
-    role: null,
-    stack: ["Ruby on Rails", "Next.js"],
-    features: ["API REST", "Authentification", "Quêtes", "Combats", "Inventaire"],
-    contributions: [],
+    role: "Projet individuel",
+    stack: [
+      "Ruby on Rails (API)",
+      "PostgreSQL",
+      "Devise JWT",
+      "Pundit",
+      "Blueprinter",
+      "RSpec",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "TanStack Query",
+    ],
+    features: [
+      "Authentification",
+      "Création et gestion de personnages",
+      "Inventaire et équipement",
+      "Quêtes, énigmes et combats",
+      "Espace d’administration : quêtes, objets, PNJ, récompenses et énigmes",
+    ],
+    contributions: [
+      "API JSON versionnée sous /api/v1, avec des contrôleurs minces qui délèguent les règles métier à des services (personnages, combat, équipement, inventaire, quêtes, énigmes, récompenses).",
+      "Authentification par Devise JWT, contrôle d’accès aux ressources avec Pundit et sérialisation des réponses avec Blueprinter.",
+      "Tests de l’API avec RSpec.",
+      "Interface Next.js (App Router) : appels API centralisés et gestion des données avec TanStack Query.",
+    ],
     competences: [
-      "Concevoir et développer une API REST avec Ruby on Rails",
-      "Mettre en place l’authentification des utilisateurs",
-      "Modéliser les données métier : quêtes, combats, inventaire",
+      "Concevoir une API REST versionnée avec Ruby on Rails",
+      "Sécuriser l’accès : authentification JWT et autorisations par rôle",
+      "Organiser la logique métier en services : combat, quêtes, équipement",
+      "Tester une API avec RSpec",
       "Développer une interface Next.js qui consomme l’API",
     ],
     rncp: null,
     learnings: null,
     links: { demo: null, repo: null },
-    image: null,
+    image: {
+      src: "/projects/rpg.jpg",
+      width: 1920,
+      height: 1080,
+      alt: "Page d’accueil du RPG « L’Ère des Ombres » avec les boutons Entrer et S’inscrire",
+    },
   },
   // TODO (GuessWhat) : contexte, période, rôle, ce que j'ai fait, analyse,
   // rattachement RNCP, lien de démo.
