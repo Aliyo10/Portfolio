@@ -61,7 +61,10 @@ export default async function ProjectPage({ params }: PageProps) {
   const hasLinks = Boolean(project.links.demo || project.links.repo);
   const hasAside = project.stack.length > 0 || hasLinks;
   const hasMain =
-    project.features.length > 0 || project.competences.length > 0 || Boolean(project.learnings);
+    project.features.length > 0 ||
+    project.contributions.length > 0 ||
+    project.competences.length > 0 ||
+    Boolean(project.learnings);
 
   return (
     <article className="section">
@@ -129,6 +132,12 @@ export default async function ProjectPage({ params }: PageProps) {
                 {project.features.length > 0 ? (
                   <Block title="Le projet">
                     <BulletList items={project.features} />
+                  </Block>
+                ) : null}
+
+                {project.contributions.length > 0 ? (
+                  <Block title="Ce que j’ai fait">
+                    <BulletList items={project.contributions} />
                   </Block>
                 ) : null}
 
