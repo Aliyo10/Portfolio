@@ -4,7 +4,7 @@
 // - GuessWhat : message d'Aliyo (« Pictionary multijoueur, Go + WebSockets + Next.js »).
 // - Sportly : message d'Aliyo + repo W-PJL-400-LYN-4-1-projetlibre-1 (lu en lecture
 //   seule : package.json, docs, historique des commits d'Aliyo).
-// - my_bot : message d'Aliyo uniquement (repo introuvable sur la machine).
+// - my_bot : message d'Aliyo + repo W-WEB-405-LYN-4-1-mybot-1 (lecture seule).
 //
 // « competences » : compétences démontrées, déduites strictement des
 // fonctionnalités et contributions décrites. Le rattachement aux blocs officiels
@@ -93,25 +93,59 @@ export const projects: Project[] = [
     links: { demo: null, repo: null },
     image: null,
   },
-  // TODO (my_bot) : repo introuvable sur la machine. Rôle, stack, fonctionnalités,
-  // ce que j'ai fait, compétences, analyse « ce que j'en retiens », rattachement
-  // RNCP, capture, liens.
+  // Source : repo W-WEB-405-LYN-4-1-mybot-1 (lecture seule : README, package.json,
+  // structure, commits — 5 commits, tous d'Aliyo, du 26/10 au 01/11/2026).
+  // « learnings » : proposition rédigée à partir des choix techniques du repo, à valider.
+  // TODO (my_bot) : rattachement RNCP, capture, lien de démo, lien public du code
+  // (le repo de l'organisation Epitech n'est pas public).
   {
     slug: "my-bot",
     title: "my_bot · Generative Pets",
-    summary: "Chatbot d’IA générative qui conseille sur l’adoption d’animaux.",
+    summary: "Chatbot d’IA générative qui conseille sur l’adoption d’animaux de refuge.",
     context: "Projet Epitech",
     period: "Octobre 2026",
-    role: null,
-    stack: [],
-    features: [],
-    contributions: [],
-    competences: [],
+    role: "Projet individuel",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "LM Studio (API compatible OpenAI)",
+      "react-markdown",
+      "Web Speech API",
+    ],
+    features: [
+      "Conseil à l’adoption par un modèle d’IA local, servi par LM Studio",
+      "Catalogue de 20 animaux du refuge, avec une page dédiée",
+      "Fiches animaux affichées directement dans la conversation",
+      "Analyse de photos avec un modèle multimodal",
+      "Plusieurs discussions sauvegardées dans le navigateur",
+      "Prompt système modifiable dans les réglages",
+      "Dictée vocale",
+    ],
+    contributions: [
+      "Route POST /api/chat sans état : le navigateur renvoie l’historique, limité aux 20 derniers messages.",
+      "Prompt système qui contient le catalogue : le modèle ne peut proposer que ces animaux, via un tag que l’interface transforme en fiche (un identifiant inconnu est ignoré).",
+      "Envoi de photos : redimensionnement dans le navigateur, refus au-delà de 10 Mo, seule la dernière image part vers le modèle.",
+      "Interface multi-discussions sauvegardée dans le localStorage, avec retrait des images les plus anciennes si le quota est dépassé.",
+      "Réglages du prompt système et dictée vocale en français.",
+      "Option pour les modèles qui refusent le rôle système, et guide d’installation.",
+    ],
+    competences: [
+      "Intégrer un modèle d’IA générative via une API compatible OpenAI",
+      "Encadrer les réponses d’un modèle par le prompt système",
+      "Développer une route API Next.js sans état",
+      "Traiter des images côté client avant l’envoi",
+      "Persister des données dans le navigateur et gérer ses limites",
+      "Utiliser une API du navigateur : Web Speech API",
+    ],
     rncp: null,
-    learnings: null,
+    learnings:
+      "Brancher un modèle local m’a appris à encadrer ses réponses plutôt qu’à lui faire confiance : le catalogue est fourni dans le prompt, et l’interface n’affiche que les fiches dont l’identifiant existe. J’ai aussi dû composer avec les limites du navigateur, de la taille des images au quota du stockage local.",
     links: { demo: null, repo: null },
     image: null,
   },
+  // Période : projet de fin d'année, commencé en début d'année (premier commit le 28/07/2026).
   // TODO (Sportly) : rattachement RNCP, capture, lien de démo, lien public du code
   // (le repo de l'organisation Epitech n'est pas public).
   {
@@ -119,8 +153,8 @@ export const projects: Project[] = [
     title: "Sportly",
     summary:
       "Application mobile sportive tout-en-un : trouver des coachs et des clubs, réserver des séances, suivre son entraînement et sa progression, échanger avec la communauté.",
-    context: "Projet Epitech · équipe de 3",
-    period: "Octobre – novembre 2026",
+    context: "Projet de fin d’année Epitech · équipe de 3",
+    period: "Depuis juillet 2026",
     role: "Tech lead / project owner",
     // Repo : pg + migrations SQL. Prisma (indiqué par Aliyo) n'est pas utilisé
     // dans le code actuel, il n'est donc pas listé.
