@@ -1,8 +1,7 @@
 // Source : CV « MOUSSA ALIYO CV.pdf » et portfolio existant (commit 23e1fbf).
 // Règle : ni téléphone, ni date de naissance, ni adresse précise sur le site.
 
-// TODO : confirmer l'URL de production (reprise de l'ancien app/head.js).
-export const SITE_URL = "https://portfolio-aliyo-deploy.vercel.app";
+export const SITE_URL = "https://portfolio-aliyo-moussa.vercel.app";
 
 export type Photo = {
   src: string;
