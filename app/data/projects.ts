@@ -13,6 +13,7 @@
 // Rien n'est inventé : toute information manquante vaut null (ou []) et n'est
 // pas affichée sur le site. Chaque projet liste ses TODO ci-dessous.
 
+// Liens vers le code : volontairement absents (repos privés, accès non partagé).
 export type ProjectLinks = {
   demo: string | null;
   repo: string | null;
@@ -48,7 +49,7 @@ export type Project = {
 
 export const projects: Project[] = [
   // TODO (RPG) : période, rôle, ce que j'ai fait, analyse « ce que j'en retiens »,
-  // rattachement RNCP, capture, lien de démo, lien GitHub.
+  // rattachement RNCP, capture, lien de démo.
   {
     slug: "rpg",
     title: "RPG",
@@ -71,7 +72,7 @@ export const projects: Project[] = [
     image: null,
   },
   // TODO (GuessWhat) : contexte, période, rôle, ce que j'ai fait, analyse,
-  // rattachement RNCP, lien de démo, lien GitHub.
+  // rattachement RNCP, lien de démo.
   {
     slug: "guesswhat",
     title: "GuessWhat",
@@ -102,8 +103,7 @@ export const projects: Project[] = [
   // Source : repo W-WEB-405-LYN-4-1-mybot-1 (lecture seule : README, package.json,
   // structure, commits — 5 commits, tous d'Aliyo, du 26/10 au 01/11/2026).
   // « learnings » : proposition rédigée à partir des choix techniques du repo, à valider.
-  // TODO (my_bot) : rattachement RNCP, lien de démo, lien public du code
-  // (le repo de l'organisation Epitech n'est pas public).
+  // TODO (my_bot) : rattachement RNCP, lien de démo.
   {
     slug: "my-bot",
     title: "my_bot · Generative Pets",
@@ -158,8 +158,7 @@ export const projects: Project[] = [
     },
   },
   // Période : projet de fin d'année, commencé en début d'année (premier commit le 28/07/2026).
-  // TODO (Sportly) : rattachement RNCP, lien de démo, lien public du code
-  // (le repo de l'organisation Epitech n'est pas public).
+  // TODO (Sportly) : rattachement RNCP, lien de démo.
   {
     slug: "sportly",
     title: "Sportly",
