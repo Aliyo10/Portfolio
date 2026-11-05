@@ -1,0 +1,465 @@
+<!doctype html>
+<!--
+  CV d'Aliyo Moussa, version publique du portfolio.
+  Source : CV « MOUSSA ALIYO CV.pdf ». Retirés volontairement : téléphone,
+  date de naissance / âge, adresse précise (seule la ville « Lyon » reste).
+  Généré en PDF par scripts/build-cv.mjs (npm run cv) -> public/cv-aliyo-moussa.pdf
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>CV · Aliyo Moussa · Alternant développeur web</title>
+    <meta name="author" content="Aliyo Moussa" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6eee3;
+        --surface: #fcf8f2;
+        --parquet: #eadbc4;
+        --ink: #14213d;
+        --navy: #1e3a5f;
+        --muted: #4f5b6e;
+        --accent: #e8590c;
+        --link: #b4440a;
+        --line: #d8c3a3;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        font-family: "Barlow", system-ui, sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.5;
+        color: var(--ink);
+        background: var(--surface);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Barlow Condensed", system-ui, sans-serif;
+        line-height: 1.1;
+        text-transform: uppercase;
+      }
+
+      .page {
+        display: grid;
+        grid-template-columns: 66mm 1fr;
+        grid-template-rows: auto 1fr;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
+      }
+
+      /* ---------- En-tête ---------- */
+      header {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 66mm 1fr;
+        background: var(--bg);
+        border-bottom: 2px solid var(--accent);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .court {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .photo-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 9mm 0 8mm;
+      }
+
+      .photo {
+        width: 38mm;
+        height: 38mm;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 30%;
+        border: 2px solid var(--accent);
+        outline: 4px solid var(--bg);
+      }
+
+      .identity {
+        position: relative;
+        padding: 12mm 12mm 8mm 4mm;
+        align-self: center;
+      }
+
+      .identity h1 {
+        font-size: 34pt;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .identity h1 span {
+        color: var(--navy);
+      }
+
+      .role {
+        margin-top: 1.5mm;
+        font-size: 10.5pt;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--link);
+      }
+
+      .tagline {
+        margin-top: 3mm;
+        font-size: 10.5pt;
+        color: var(--muted);
+        max-width: 110mm;
+      }
+
+      /* ---------- Colonne latérale ---------- */
+      aside {
+        background: var(--parquet);
+        padding: 8mm 7mm 8mm 9mm;
+      }
+
+      aside section + section {
+        margin-top: 7.5mm;
+      }
+
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        font-size: 14.5pt;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 2.5mm;
+      }
+
+      h2::before {
+        content: "";
+        width: 6mm;
+        height: 2px;
+        background: var(--accent);
+        flex-shrink: 0;
+      }
+
+      aside ul {
+        list-style: none;
+      }
+
+      aside li {
+        position: relative;
+        padding-left: 3.5mm;
+        margin-bottom: 1.4mm;
+      }
+
+      aside li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 1.4mm;
+        height: 1.4mm;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .contact li::before {
+        display: none;
+      }
+
+      .contact li {
+        padding-left: 0;
+      }
+
+      .label {
+        display: block;
+        font-size: 7.8pt;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      /* ---------- Colonne principale ---------- */
+      main {
+        padding: 8mm 12mm 8mm 9mm;
+      }
+
+      main section + section {
+        margin-top: 8mm;
+      }
+
+      .entry {
+        position: relative;
+        padding-left: 5mm;
+        border-left: 2px solid var(--line);
+      }
+
+      .entry + .entry {
+        margin-top: 6mm;
+      }
+
+      .entry::before {
+        content: "";
+        position: absolute;
+        left: -1.6mm;
+        top: 1.3mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        border-radius: 50%;
+        background: var(--navy);
+        box-shadow: 0 0 0 1mm var(--surface);
+      }
+
+      .entry.experience::before {
+        background: var(--accent);
+      }
+
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 4mm;
+      }
+
+      h3 {
+        font-size: 13pt;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .period {
+        flex-shrink: 0;
+        font-size: 8.4pt;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .org {
+        font-weight: 600;
+        color: var(--navy);
+      }
+
+      .org span {
+        font-weight: 400;
+        color: var(--muted);
+      }
+
+      .entry ul {
+        margin-top: 1.5mm;
+        padding-left: 4mm;
+      }
+
+      .entry li {
+        margin-bottom: 0.8mm;
+      }
+
+      .entry li::marker {
+        color: var(--accent);
+      }
+
+      .entry li strong {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <svg class="court" viewBox="0 0 210 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g fill="none" stroke="#d8c3a3" stroke-width="0.4">
+            <path d="M160 0v60" />
+            <circle cx="160" cy="30" r="14" />
+            <circle cx="160" cy="30" r="4.5" />
+          </g>
+        </svg>
+        <div class="photo-wrap">
+          <img class="photo" src="photo.jpg" alt="Portrait d’Aliyo Moussa" />
+        </div>
+        <div class="identity">
+          <h1>Aliyo <span>Moussa</span></h1>
+          <p class="role">Alternant développeur web</p>
+          <p class="tagline">
+            Passionné par l’informatique depuis plusieurs années, je souhaite aujourd’hui en faire
+            mon métier.
+          </p>
+        </div>
+      </header>
+
+      <aside>
+        <section class="contact">
+          <h2>Coordonnées</h2>
+          <ul>
+            <li>
+              <span class="label">Email</span>
+              <a href="mailto:aliyomoussa@gmail.com">aliyomoussa@gmail.com</a>
+            </li>
+            <li>
+              <span class="label">Ville</span>
+              Lyon
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hard skills</h2>
+          <ul>
+            <li>Java Spring Boot</li>
+            <li>Angular</li>
+            <li>JavaScript / TypeScript</li>
+            <li>HTML</li>
+            <li>CSS / SCSS</li>
+            <li>Tailwind / Bootstrap</li>
+            <li>React JS / Next JS</li>
+            <li>Laravel</li>
+            <li>PostgreSQL / MySQL</li>
+            <li>MongoDB</li>
+            <li>Environnement : Linux / Git / Azure / Windows</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Soft skills</h2>
+          <ul>
+            <li>Travail en équipe</li>
+            <li>Flexibilité</li>
+            <li>Optimiste</li>
+            <li>Polyvalence</li>
+            <li>Curiosité &amp; veille informatique</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Langues</h2>
+          <ul>
+            <li>Anglais : niveau B1</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Centres d’intérêt</h2>
+          <ul>
+            <li>Basket-ball : 8 ans</li>
+            <li>Musculation</li>
+            <li>Manga / Film / Anime</li>
+          </ul>
+        </section>
+      </aside>
+
+      <main>
+        <section>
+          <h2>Expérience professionnelle</h2>
+
+          <article class="entry experience">
+            <div class="entry-head">
+              <h3>Alternant Software Engineer</h3>
+              <span class="period">Septembre 2025 – aujourd’hui</span>
+            </div>
+            <p class="org">Volvo Group – Renault Trucks <span>· Lyon</span></p>
+            <ul>
+              <li>Modernisation d’une application industrielle de Java 8 / JSF vers Spring Boot / Angular.</li>
+              <li>
+                Développement d’une nouvelle application en Spring Boot et Angular pour suivre le
+                statut des applications d’usine.
+              </li>
+              <li>Création de maquettes UI sur Figma pour définir les interfaces avant le développement.</li>
+              <li>Documentation technique pour préparer la migration.</li>
+            </ul>
+          </article>
+
+          <article class="entry experience">
+            <div class="entry-head">
+              <h3>Manutentionnaire</h3>
+              <span class="period">Novembre 2022 – août 2024</span>
+            </div>
+            <p class="org">GL events <span>· Lyon</span></p>
+            <ul>
+              <li>Gestion des approvisionnements et installation des buvettes.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section>
+          <h2>Formations</h2>
+
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Titre RNCP de niveau 5 Développeur web</h3>
+              <span class="period">Novembre 2024 – aujourd’hui</span>
+            </div>
+            <p class="org">Epitech <span>· Lyon</span></p>
+            <ul>
+              <li>
+                <strong>RPG</strong> (Ruby on Rails / Next.js) : application avec API REST,
+                authentification, quêtes, combats et inventaire.
+              </li>
+              <li>
+                <strong>E-commerce</strong> (Laravel / Next.js) : boutique en ligne optimisée côté
+                base de données, performance et SEO.
+              </li>
+              <li>
+                <strong>FreeAds</strong> (Laravel) : plateforme de petites annonces avec
+                authentification et gestion des utilisateurs.
+              </li>
+            </ul>
+          </article>
+
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Certificat Conception et Développement Web</h3>
+              <span class="period">Octobre 2023 – février 2024</span>
+            </div>
+            <p class="org">emlyon business school <span>· Écully</span></p>
+            <ul>
+              <li>Développement front-end : HTML, CSS, JavaScript.</li>
+              <li>Notions clés de la gestion de projets.</li>
+            </ul>
+          </article>
+
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Baccalauréat STMG, option SIO</h3>
+              <span class="period">2019 – 2022</span>
+            </div>
+            <p class="org">Lycée Martinière Duchère</p>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

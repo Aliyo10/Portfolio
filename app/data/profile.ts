@@ -39,7 +39,7 @@ export const profile: Profile = {
   linkedin: "https://fr.linkedin.com/in/aliyo-moussa-18b3602a1",
   github: "https://github.com/Aliyo10",
   formspreeEndpoint: "https://formspree.io/f/xjkyepna",
-  cvUrl: null,
+  cvUrl: "/cv-aliyo-moussa.pdf",
   photo: {
     src: "/photoToile.jpg",
     width: 4371,
