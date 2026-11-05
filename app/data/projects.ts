@@ -71,7 +71,7 @@ export const projects: Project[] = [
     image: null,
   },
   // TODO (GuessWhat) : contexte, période, rôle, ce que j'ai fait, analyse,
-  // rattachement RNCP, capture, lien de démo, lien GitHub.
+  // rattachement RNCP, lien de démo, lien GitHub.
   {
     slug: "guesswhat",
     title: "GuessWhat",
@@ -91,12 +91,18 @@ export const projects: Project[] = [
     rncp: null,
     learnings: null,
     links: { demo: null, repo: null },
-    image: null,
+    // Capture réelle du front (repo W-WEB-404-LYN-4-1-mygo-2, commit 6d899fa).
+    image: {
+      src: "/projects/guesswhat.jpg",
+      width: 1920,
+      height: 1080,
+      alt: "Page d’accueil de GuessWhat : choix du pseudo, création d’une room ou saisie d’un code",
+    },
   },
   // Source : repo W-WEB-405-LYN-4-1-mybot-1 (lecture seule : README, package.json,
   // structure, commits — 5 commits, tous d'Aliyo, du 26/10 au 01/11/2026).
   // « learnings » : proposition rédigée à partir des choix techniques du repo, à valider.
-  // TODO (my_bot) : rattachement RNCP, capture, lien de démo, lien public du code
+  // TODO (my_bot) : rattachement RNCP, lien de démo, lien public du code
   // (le repo de l'organisation Epitech n'est pas public).
   {
     slug: "my-bot",
@@ -143,10 +149,16 @@ export const projects: Project[] = [
     learnings:
       "Brancher un modèle local m’a appris à encadrer ses réponses plutôt qu’à lui faire confiance : le catalogue est fourni dans le prompt, et l’interface n’affiche que les fiches dont l’identifiant existe. J’ai aussi dû composer avec les limites du navigateur, de la taille des images au quota du stockage local.",
     links: { demo: null, repo: null },
-    image: null,
+    // Capture réelle de l'interface (sans modèle chargé).
+    image: {
+      src: "/projects/my-bot.jpg",
+      width: 1920,
+      height: 1080,
+      alt: "Interface de my_bot : liste des discussions et écran d’accueil du conseiller avec des suggestions de questions",
+    },
   },
   // Période : projet de fin d'année, commencé en début d'année (premier commit le 28/07/2026).
-  // TODO (Sportly) : rattachement RNCP, capture, lien de démo, lien public du code
+  // TODO (Sportly) : rattachement RNCP, lien de démo, lien public du code
   // (le repo de l'organisation Epitech n'est pas public).
   {
     slug: "sportly",
@@ -193,7 +205,13 @@ export const projects: Project[] = [
     learnings:
       "Tenir le rôle de tech lead m’a appris qu’un socle commun posé tôt (modèle de données, authentification, routage par module, client API) permet à chacun d’avancer sur son lot sans bloquer les autres. Modéliser un domaine complet, des prestataires aux créneaux, réservations et avis, m’a obligé à fixer les règles métier avant d’écrire le code. Enfin, brancher moi-même les écrans sur l’API m’a montré l’importance d’un contrat clair entre le front et le back.",
     links: { demo: null, repo: null },
-    image: null,
+    // Captures réelles de l'app (version web Expo, sans backend) : accueil et inscription.
+    image: {
+      src: "/projects/sportly.jpg",
+      width: 1920,
+      height: 1080,
+      alt: "Deux écrans de l’application Sportly : l’accueil et la création de compte",
+    },
   },
 ];
 
